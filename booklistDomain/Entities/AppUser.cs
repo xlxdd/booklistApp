@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace booklistDomain.Entities
 {
-    internal class AppUser
+    public class AppUser: IdentityUser<Guid>
     {
+        public IEnumerable<BookList> BookLists { get; private set; }= new List<BookList>();
+        public IEnumerable<Comment> comments { get; private set; } = new List<Comment>();
+        public AppUser(string userName) : base(userName)
+        {
+            Id = Guid.NewGuid();
+        }
+        //暂时这样写
     }
 }
