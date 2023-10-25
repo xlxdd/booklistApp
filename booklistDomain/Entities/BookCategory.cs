@@ -10,7 +10,7 @@ namespace booklistDomain.Entities
     public record BookCategory:BaseEntity
     {
         public string Name { get;private set; }
-        public IEnumerable<Book> books { get; private set; }=new List<Book>();
+        public IEnumerable<Book> books { get; private set; } = new List<Book>();
         private BookCategory() { }
         public BookCategory Create(string Name)
         {

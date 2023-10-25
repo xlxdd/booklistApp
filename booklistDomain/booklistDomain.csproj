@@ -7,9 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Enums\" />
+    <Folder Include="Data\Enums\" />
     <Folder Include="Events\" />
-    <Folder Include="ValueObjects\" />
+    <Folder Include="Data\ValueObjects\" />
+    <Folder Include="Data\" />
   </ItemGroup>
 
   <ItemGroup>
