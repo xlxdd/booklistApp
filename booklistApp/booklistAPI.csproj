@@ -7,8 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BookList\" />
+    <Folder Include="Books\Request\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\booklistDomain\booklistDomain.csproj" />
+    <ProjectReference Include="..\booklistInfrastructure\booklistInfrastructure.csproj" />
+    <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
 
 </Project>

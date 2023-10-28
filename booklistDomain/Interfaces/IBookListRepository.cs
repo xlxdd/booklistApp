@@ -1,17 +1,21 @@
 ﻿using booklistDomain.Entities;
+using booklistDomain.Models;
 
 namespace booklistDomain.Interfaces
 {
     public interface IBookListRepository
     {
-        /// <summary>
-        /// 本仓库对应聚合booklist
-        /// 操作 表booklist comment star
-        /// </summary>
-        /// <returns></returns>
-        public Task<IEnumerable<BookList>> GetAllBookListAsync();//获取所有书单
-        public Task<BookList?> GetBookListByIdAsync(Guid id);//根据id获取书单
-        public Task<IEnumerable<Comment>> GetCommentsByBLIdAsync(Guid id);//获取某一书单的所有评论
-        public Task<IEnumerable<Star>> GetStarsByBLIdAsync(Guid id, int num);//获取某一书单的前n位收藏者
+        public Task<BookList?> GetBookListByIdAsync(Guid id);//通过id获取书单
+        public Task<IEnumerable<BookList>> GetBookListByIdAsync(IEnumerable<Guid> ids);//批量获取
+        public Task<IEnumerable<BookList>> GetBookListsAsync(int skipNum,int takeNum);//获取书单(分页)
+        public Task<IEnumerable<BookList>> GetBookListsByUserAsync(Guid id);//获取指定用户创建的书单
+        public Task<Comment?> GetCommentByIdAsync(Guid id);//获取指定id的评论
+        public Task<IEnumerable<Comment>> GetCommentsByBookListAsync(Guid id);//获取指定书单的评论
+        public Task<IEnumerable<Comment>> GetCommentsByUserAsync(Guid id);//获取指定用户的评论(这个好像一般不允许)
+        public Task<Like?> GetLikeByIdAsync(long id);//获取指定id的like
+        public Task<IEnumerable<Like>> GetLikesByCommentAsync(Guid id);//获取指定评论的所有like记录
+        public Task<Star?> GetStarByIdAsync(long id);//获取指定id的收藏
+        public Task<IEnumerable<Star>> GetStarsByBookList(Guid id);//获取指定书单的所有收藏记录
+        public Task<IEnumerable<Star>> GetStarsByUserAsync(Guid id);//获取指定用户的收藏
     }
 }

@@ -1,4 +1,6 @@
-﻿using Common.Models;
+﻿using booklistDomain.Models;
+using Common.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace booklistDomain.Entities
 {
@@ -10,12 +12,10 @@ namespace booklistDomain.Entities
         public string PubName { get; private set; }
         public DateTime PubTime { get; private set; }
         public decimal Price { get; private set; }
-        public IEnumerable<BookCategory> BookCategories { get; private set; }=new List<BookCategory>();
-        public IEnumerable<BookList> BookLists { get; private set; } = new List<BookList>();
         public string Abs { get ; private set; }
         //给EFcore使用的空构造函数
         private Book() { }
-        public static Book Create(Uri coverUrl,string bookName,string author,string pubName,DateTime pubTime,decimal price, IEnumerable<BookCategory> bookcategories,string abs)
+        public static Book Create(Uri coverUrl,string bookName,string author,string pubName,DateTime pubTime,decimal price, string abs)
         {
             var book = new Book();
             book.CoverUrl = coverUrl;
@@ -23,7 +23,6 @@ namespace booklistDomain.Entities
             book.Author = author;
             book.PubTime = pubTime;
             book.Price = price;
-            book.BookCategories = bookcategories;
             book.Abs = abs;
             return book;
         }
@@ -55,11 +54,6 @@ namespace booklistDomain.Entities
         public Book ChangePrice(decimal price)
         {
             this.Price = price;
-            return this;
-        }
-        public Book ChangeCategory(IEnumerable<BookCategory> bookCategories)
-        {
-            this.BookCategories = bookCategories;
             return this;
         }
         public Book ChangeAbs(string abs)

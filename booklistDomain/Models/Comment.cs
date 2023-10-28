@@ -1,4 +1,5 @@
 ﻿using booklistDomain.Entities.Identity;
+using booklistDomain.Models;
 using Common.Models;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,9 @@ namespace booklistDomain.Entities
     {
         public string Content { get; private set; }//评论内容
         public int LikeNum { get; private set; } = 0;//like数量
-        public AppUser Commentator { get; private set; }//用户和评论 一对多关系
-        public BookList BookList { get; private set; }//书单和评论 一对多关系
-        public Like like { get; private set; }//评论和like 一对一关系
-        private Comment() { }
+        public Guid CommentatorId { get; private set; }
+        public Guid BookListId { get; private set; }
+        private Comment() { } 
         public Comment ChangeLikeNum(int num)
         {
             this.LikeNum += num;

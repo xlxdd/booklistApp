@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Enums\" />
-    <Folder Include="Events\" />
-    <Folder Include="Data\ValueObjects\" />
-    <Folder Include="Data\" />
+    <Folder Include="Data%28empty now%29\Enums\" />
+    <Folder Include="Data%28empty now%29\Events\" />
+    <Folder Include="Data%28empty now%29\ValueObjects\" />
+    <Folder Include="Data%28empty now%29\" />
   </ItemGroup>
 
   <ItemGroup>

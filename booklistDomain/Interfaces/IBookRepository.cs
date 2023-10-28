@@ -1,22 +1,18 @@
 ﻿using booklistDomain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using booklistDomain.Models;
 
 namespace booklistDomain.Interfaces
 {
     public interface IBookRepository
     {
-        /// <summary>
-        /// 本仓库对应聚合book
-        /// 操作 表book bookcategories
-        /// </summary>
-        /// <returns></returns>
-        public Task<IEnumerable<BookCategory>> GetBookCategoriesAsync();//获取书的所有种类
-        public Task<IEnumerable<BookCategory>> GetBookCategoriesByBookIdAsync(Guid id);//获取一本书的所有类别
-        public Task<IEnumerable<Book>> GetBooksAsync(int skipNum,int takeNum);//获取所有的书
-        public Task<IEnumerable<Book>> GetBooksByCategoryAsync(BookCategory bookCategory,int skipNum,int takeNum);//获取某一种类的书
+        public Task<Book?> GetBookByIdAsync(Guid id);//通过id获取书
+        public Task<IEnumerable<Book>> GetBookByIdAsync(IEnumerable<Guid> ids);//批量获取
+        public Task<IEnumerable<Book>> GetBooksAsync(int skipNum,int takeNum);//获取书(分页)
+        public Task<BookCategory?> GetBookCategoryByIdAsync(Guid id);//通过id获取类别
+        public Task<IEnumerable<BookCategory>> GetBookCategoryByIdAsync(IEnumerable<Guid> ids);//通过id获取类别
+        public Task<IEnumerable<BookCategory>> GetBookCategoriesAsync();//获取所有类别
+        public Task<IEnumerable<BookBookCategory>> GetCTGRSByBookAsync(Guid id);//获取书的类别
+        public Task<IEnumerable<BookBookCategory>> GetBooksByCTGRAsync(Guid id);//通过类别获取书
+        public Task<IEnumerable<BookBookList>> GetBooksByBookListAsync(Guid id);//获取指定书单中的书
     }
 }
