@@ -1,6 +1,4 @@
-﻿using booklistDomain.Models;
-using Common.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using Common.Models;
 
 namespace booklistDomain.Entities
 {

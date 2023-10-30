@@ -16,6 +16,7 @@ namespace booklistInfrastructure
         public DbSet<Like> Likes { get; private set; }
         public DbSet<Star> Stars { get; private set; }
         public DbSet<BookBookList> BookBookLists { get; private set; }
+        public DbSet<BookBookCategory> BookBookCtgrs { get; private set; }
         public AppDbContext(DbContextOptions<AppDbContext> opt):base(opt) { }
         protected override void OnModelCreating(ModelBuilder builder)
         {

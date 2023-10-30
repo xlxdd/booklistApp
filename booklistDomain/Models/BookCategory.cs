@@ -17,6 +17,10 @@ namespace booklistDomain.Entities
             bookctg.Name = Name;
             return bookctg;
         }
-        //bookcategory设置为不能修改
+        public BookCategory ChangeName(string name)
+        {
+            this.Name = name;
+            return this;
+        }
     }
 }

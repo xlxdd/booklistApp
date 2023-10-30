@@ -14,12 +14,14 @@ namespace booklistDomain.Entities
         public bool IsDeleted { get; private set; } = false;//软删除
         public Guid CreaterId { get; private set; }
         private BookList() { }
-        public BookList Create(Uri coverUrl,string title,string description)
+        public static BookList Create(Uri coverUrl,string title,string description,Guid id)
         {
-            this.CoverUrl = coverUrl;
-            this.Title = title;
-            this.Descrpition = description;
-            return this;
+            var bookList = new BookList();
+            bookList.CoverUrl = coverUrl;
+            bookList.Title = title;
+            bookList.Descrpition = description;
+            bookList.CreaterId = id;
+            return bookList;
         }
         public BookList ChangeCover(Uri coverUrl)
         {
