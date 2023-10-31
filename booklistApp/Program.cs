@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
 
@@ -24,12 +25,12 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     options.SuppressModelStateInvalidFilter = true;
 });
 builder.Services.Configure<JWTOptions>(builder.Configuration.GetSection("JWT"));
-builder.Services.AddScoped<IBookRepository,BookRepository>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IFileService, CloudinaryFileService>();
 builder.Services.AddScoped<BookDomainService>();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),new MySqlServerVersion(new Version(builder.Configuration["Database:Version"])));
+    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(builder.Configuration["Database:Version"])));
 });//注册db
 
 JWTOptions jwtOpt = builder.Configuration.GetSection("JWT").Get<JWTOptions>();
@@ -52,7 +53,11 @@ builder.Services.AddControllers();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());//注册验证器
 builder.Services.AddFluentValidationAutoValidation();//启用自动验证
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookList API", Version = "v1" });
+    c.EnableAnnotations();
+});
 var idBuilder = builder.Services.AddIdentityCore<AppUser>(options =>
 {
     options.Password.RequireDigit = false;
@@ -79,7 +84,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookList API V1");
+    });
 }
 
 app.UseHttpsRedirection();

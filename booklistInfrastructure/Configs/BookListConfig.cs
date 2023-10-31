@@ -1,5 +1,4 @@
 ﻿using booklistDomain.Entities;
-using booklistDomain.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

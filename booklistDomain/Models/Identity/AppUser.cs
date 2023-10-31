@@ -1,5 +1,4 @@
-﻿using booklistDomain.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace booklistDomain.Entities.Identity
 {

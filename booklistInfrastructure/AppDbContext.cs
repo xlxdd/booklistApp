@@ -3,11 +3,10 @@ using booklistDomain.Entities.Identity;
 using booklistDomain.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace booklistInfrastructure
 {
-    public class AppDbContext:IdentityDbContext<AppUser,Role,Guid>
+    public class AppDbContext : IdentityDbContext<AppUser, Role, Guid>
     {
         public DbSet<Book> Books { get; private set; }
         public DbSet<BookList> BookList { get; private set; }
@@ -17,7 +16,7 @@ namespace booklistInfrastructure
         public DbSet<Star> Stars { get; private set; }
         public DbSet<BookBookList> BookBookLists { get; private set; }
         public DbSet<BookBookCategory> BookBookCtgrs { get; private set; }
-        public AppDbContext(DbContextOptions<AppDbContext> opt):base(opt) { }
+        public AppDbContext(DbContextOptions<AppDbContext> opt) : base(opt) { }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -2,7 +2,7 @@
 {
     public interface ISoftDelete
     {
-        bool IsDeleted { get;}
+        bool IsDeleted { get; }
         void SoftDelete();
     }
 }

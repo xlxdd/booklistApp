@@ -13,7 +13,7 @@ namespace booklistDomain.DomainService
         private readonly IIdentityRepository _repository;
         private readonly ITokenService _tokenService;
         private readonly IOptions<JWTOptions> _optJWT;
-        public IdentityDomainService(IIdentityRepository repository,ITokenService tokenService,IOptions<JWTOptions> opt)
+        public IdentityDomainService(IIdentityRepository repository, ITokenService tokenService, IOptions<JWTOptions> opt)
         {
             _repository = repository;
             _tokenService = tokenService;

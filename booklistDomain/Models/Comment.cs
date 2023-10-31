@@ -1,22 +1,15 @@
-﻿using booklistDomain.Entities.Identity;
-using booklistDomain.Models;
-using Common.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Common.Models;
 
 namespace booklistDomain.Entities
 {
-    public record Comment:BaseEntity
+    public record Comment : BaseEntity
     {
         public string Content { get; private set; }//评论内容
         public int LikeNum { get; private set; } = 0;//like数量
         public Guid CommentatorId { get; private set; }
         public Guid BookListId { get; private set; }
-        private Comment() { } 
-        public static Comment Create(string content,Guid uid,Guid bid)
+        private Comment() { }
+        public static Comment Create(string content, Guid uid, Guid bid)
         {
             var comment = new Comment();
             comment.Content = content;

@@ -10,10 +10,10 @@ namespace booklistDomain.Entities
         public string PubName { get; private set; }
         public DateTime PubTime { get; private set; }
         public decimal Price { get; private set; }
-        public string Abs { get ; private set; }
+        public string Abs { get; private set; }
         //给EFcore使用的空构造函数
         private Book() { }
-        public static Book Create(Uri coverUrl,string bookName,string author,string pubName,DateTime pubTime,decimal price, string abs)
+        public static Book Create(Uri coverUrl, string bookName, string author, string pubName, DateTime pubTime, decimal price, string abs)
         {
             var book = new Book();
             book.CoverUrl = coverUrl;

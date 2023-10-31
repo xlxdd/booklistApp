@@ -14,12 +14,12 @@ namespace booklistInfrastructure.Repositories
         }
         public Task<Book?> GetBookByIdAsync(Guid id)
         {
-            return _context.Books.FirstOrDefaultAsync(b=>b.Id == id);
+            return _context.Books.FirstOrDefaultAsync(b => b.Id == id);
         }
 
         public async Task<IEnumerable<Book>> GetBookByIdAsync(IEnumerable<Guid> ids)
         {
-            return await _context.Books.Where(b=>ids.Contains(b.Id)).ToListAsync();
+            return await _context.Books.Where(b => ids.Contains(b.Id)).ToListAsync();
         }
 
         public async Task<IEnumerable<BookCategory>> GetBookCategoriesAsync()
@@ -29,7 +29,7 @@ namespace booklistInfrastructure.Repositories
 
         public Task<BookCategory?> GetBookCategoryByIdAsync(Guid id)
         {
-            return _context.BookCategories.FirstOrDefaultAsync(b=>b.Id == id);
+            return _context.BookCategories.FirstOrDefaultAsync(b => b.Id == id);
         }
 
         public async Task<IEnumerable<BookCategory>> GetBookCategoryByIdAsync(IEnumerable<Guid> ids)
@@ -44,7 +44,7 @@ namespace booklistInfrastructure.Repositories
 
         public async Task<IEnumerable<BookBookList>> GetBooksByBookListAsync(Guid id)
         {
-            return await _context.BookBookLists.Where(b=>b.BookListId==id).ToListAsync();
+            return await _context.BookBookLists.Where(b => b.BookListId == id).ToListAsync();
         }
 
         public async Task<IEnumerable<BookBookCategory>> GetBooksByCTGRAsync(Guid id, int skipNum, int takeNum)

@@ -30,9 +30,9 @@ namespace booklistDomain.DomainService
         {
             return await Task.FromResult(BookBookCategory.Create(bid, cid));
         }
-        public async Task<IEnumerable<Book>> FindBookByCTGR(Guid id,int skipNum,int takeNum)
+        public async Task<IEnumerable<Book>> FindBookByCTGR(Guid id, int skipNum, int takeNum)
         {
-            var bookbookctgrs =await _repository.GetBooksByCTGRAsync(id,skipNum,takeNum);
+            var bookbookctgrs = await _repository.GetBooksByCTGRAsync(id, skipNum, takeNum);
             var ids = bookbookctgrs.Select(e => e.BookId);
             var books = await _repository.GetBookByIdAsync(ids);
             return books;

@@ -23,8 +23,8 @@ namespace booklistDomain.DomainService
         public async Task<Comment> AddCommentAsync(string content, Guid uid, Guid bid)
         {
             return await Task.FromResult(Comment.Create(
-                content, 
-                uid, 
+                content,
+                uid,
                 bid
                 ));
         }
@@ -46,12 +46,16 @@ namespace booklistDomain.DomainService
         {
             return await Task.FromResult(BookBookList.Create(bid, lid, del));
         }
-        public async Task<IEnumerable<BookList>> FindStarBookListByUser(Guid uid)
+        public Task<IEnumerable<BookList>> FindBookListByCreator(Guid id)
         {
-            var stars =await _repository.GetStarsByUserAsync(uid);
+            return _repository.GetBookListsByUserAsync(id);
+        }
+        public async Task<IEnumerable<BookList>> FindBookListByStar(Guid uid)
+        {
+            var stars = await _repository.GetStarsByUserAsync(uid);
             var ids = stars.Select(e => e.BookListId);
             var lists = await _repository.GetBookListByIdAsync(ids);
             return lists;
-        }
+        }    
     }
 }

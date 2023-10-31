@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace booklistDomain.Models
+﻿namespace booklistDomain.Models
 {
     public record BookBookList
     {
@@ -13,7 +7,7 @@ namespace booklistDomain.Models
         public Guid BookListId { get; private set; }
         public bool IsDeleted { get; private set; }
         private BookBookList() { }
-        public static BookBookList Create(Guid bid,Guid lid,bool del)
+        public static BookBookList Create(Guid bid, Guid lid, bool del)
         {
             var bookBookList = new BookBookList();
             bookBookList.BookId = bid;

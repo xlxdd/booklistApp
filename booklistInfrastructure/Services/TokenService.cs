@@ -7,7 +7,7 @@ using System.Text;
 
 namespace booklistInfrastructure.Services
 {
-    public class TokenService:ITokenService
+    public class TokenService : ITokenService
     {
         public string BuildToken(IEnumerable<Claim> claims, JWTOptions options)
         {

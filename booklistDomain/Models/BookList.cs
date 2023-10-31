@@ -1,10 +1,8 @@
-﻿using booklistDomain.Entities.Identity;
-using booklistDomain.Models;
-using Common.Models;
+﻿using Common.Models;
 
 namespace booklistDomain.Entities
 {
-    public record BookList:BaseEntity,ISoftDelete
+    public record BookList : BaseEntity, ISoftDelete
     {
         public Uri CoverUrl { get; private set; }//封面
         public string Title { get; private set; }//标题
@@ -14,7 +12,7 @@ namespace booklistDomain.Entities
         public bool IsDeleted { get; private set; } = false;//软删除
         public Guid CreaterId { get; private set; }
         private BookList() { }
-        public static BookList Create(Uri coverUrl,string title,string description,Guid id)
+        public static BookList Create(Uri coverUrl, string title, string description, Guid id)
         {
             var bookList = new BookList();
             bookList.CoverUrl = coverUrl;
