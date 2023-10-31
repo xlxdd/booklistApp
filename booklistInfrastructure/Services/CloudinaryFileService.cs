@@ -12,9 +12,9 @@ namespace booklistInfrastructure.Services
         public CloudinaryFileService()
         {
             var acc = new Account(
-                "dexylkwa6",
-                "914735594528766",
-                "kZhgbpOZyeQ6XALsYLCwrIVfPwk"
+                "",
+                "",
+                ""
                 );
             _cloudinary = new Cloudinary(acc);
         }
