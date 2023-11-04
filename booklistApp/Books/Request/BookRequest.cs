@@ -1,9 +1,10 @@
 ﻿using booklistInfrastructure;
 using FluentValidation;
-using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace booklistAPI.Books.Request
 {
+    [NotMapped]
     public class BookRequest
     {
         public IFormFile CoverImage { get; set; }

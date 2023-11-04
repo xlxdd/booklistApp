@@ -12,7 +12,6 @@ namespace booklistInfrastructure
         public DbSet<BookList> BookList { get; private set; }
         public DbSet<BookCategory> BookCategories { get; private set; }
         public DbSet<Comment> Comments { get; private set; }
-        public DbSet<Like> Likes { get; private set; }
         public DbSet<Star> Stars { get; private set; }
         public DbSet<BookBookList> BookBookLists { get; private set; }
         public DbSet<BookBookCategory> BookBookCtgrs { get; private set; }

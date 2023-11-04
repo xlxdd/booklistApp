@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Identity\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\booklistDomain\booklistDomain.csproj" />
     <ProjectReference Include="..\booklistInfrastructure\booklistInfrastructure.csproj" />
     <ProjectReference Include="..\Common\Common.csproj" />

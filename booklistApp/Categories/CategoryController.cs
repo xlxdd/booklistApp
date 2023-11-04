@@ -9,6 +9,7 @@ namespace booklistAPI.Categories
 {
     [Route("[controller]/[action]")]
     [ApiController]
+    [SwaggerTag("种类相关接口")]
     public class CategoryController : ControllerBase
     {
         private readonly AppDbContext _context;

@@ -47,16 +47,6 @@ namespace booklistInfrastructure.Repositories
             return await _context.Comments.Where(x => x.CommentatorId == id).ToListAsync();
         }
 
-        public Task<Like?> GetLikeByIdAsync(long id)
-        {
-            return _context.Likes.FirstOrDefaultAsync(x => x.Id == id);
-        }
-
-        public async Task<IEnumerable<Like>> GetLikesByCommentAsync(Guid id)
-        {
-            return await _context.Likes.Where(x => x.CommentId == id).ToListAsync();
-        }
-
         public Task<Star?> GetStarByIdAsync(long id)
         {
             return _context.Stars.FirstOrDefaultAsync(x => x.Id == id);

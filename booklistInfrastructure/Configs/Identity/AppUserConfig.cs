@@ -9,6 +9,7 @@ namespace booklistInfrastructure.Configs.Identity
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
             builder.ToTable("T_AppUsers");
+            builder.HasIndex(e=>e.PhoneNumber).IsUnique();
         }
     }
 }

@@ -19,6 +19,7 @@ namespace booklistDomain.Entities
             book.CoverUrl = coverUrl;
             book.BookName = bookName;
             book.Author = author;
+            book.PubName = pubName;
             book.PubTime = pubTime;
             book.Price = price;
             book.Abs = abs;

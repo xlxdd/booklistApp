@@ -11,6 +11,7 @@ namespace booklistAPI.Books
 {
     [Route("[controller]/[action]")]
     [ApiController]
+    [SwaggerTag("书籍相关接口")]
     public class BookController : ControllerBase
     {
         private readonly AppDbContext _context;

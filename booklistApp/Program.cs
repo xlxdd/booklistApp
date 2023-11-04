@@ -1,7 +1,9 @@
+using booklistAPI;
 using booklistDomain.DomainService;
 using booklistDomain.Entities.Identity;
 using booklistDomain.Helpers;
 using booklistDomain.Interfaces;
+using booklistDomain.Interfaces.Identity;
 using booklistDomain.Services;
 using booklistInfrastructure;
 using booklistInfrastructure.Repositories;
@@ -23,11 +25,26 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
-});
-builder.Services.Configure<JWTOptions>(builder.Configuration.GetSection("JWT"));
-builder.Services.AddScoped<IBookRepository, BookRepository>();
-builder.Services.AddScoped<IFileService, CloudinaryFileService>();
-builder.Services.AddScoped<BookDomainService>();
+});//禁用自动验证
+{//配置读取
+    builder.Services.Configure<JWTOptions>(builder.Configuration.GetSection("JWT"));
+}
+{//注册仓储层
+    builder.Services.AddScoped<IBookRepository, BookRepository>();
+    builder.Services.AddScoped<IBookListRepository, BookListRepository>();
+    builder.Services.AddScoped<IIdentityRepository, IdentityRepository>();
+}
+{//注册服务层
+    builder.Services.AddScoped<BookDomainService>();
+    builder.Services.AddScoped<BookListDomainService>();
+    builder.Services.AddScoped<IdentityDomainService>();
+}
+{//注册三方服务
+    builder.Services.AddScoped<IFileService, CloudinaryFileService>();
+    builder.Services.AddScoped<ISMSService, SMSService>();
+    builder.Services.AddScoped<ITokenService, TokenService>();
+}
+builder.Services.AddMemoryCache();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), new MySqlServerVersion(new Version(builder.Configuration["Database:Version"])));
@@ -49,13 +66,41 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 };
             });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(
+    options =>
+    {
+        options.Filters.Add<UOW>();
+    }
+    );
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());//注册验证器
 builder.Services.AddFluentValidationAutoValidation();//启用自动验证
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookList API", Version = "v1" });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT令牌",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "bearer",
+        BearerFormat = "JWT"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] { }
+        }
+    });
     c.EnableAnnotations();
 });
 var idBuilder = builder.Services.AddIdentityCore<AppUser>(options =>

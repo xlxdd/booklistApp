@@ -11,7 +11,7 @@ using booklistInfrastructure;
 namespace booklistInfrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231028142622_init")]
+    [Migration("20231103111934_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -276,9 +276,6 @@ namespace booklistInfrastructure.Migrations
                     b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("LikeNum")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("T_Comments", (string)null);
@@ -415,25 +412,6 @@ namespace booklistInfrastructure.Migrations
                     b.HasIndex("BookId", "BookListId");
 
                     b.ToTable("T_BookBookList", (string)null);
-                });
-
-            modelBuilder.Entity("booklistDomain.Models.Like", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<Guid>("CommentId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("LikerId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentId", "LikerId");
-
-                    b.ToTable("T_Likes", (string)null);
                 });
 
             modelBuilder.Entity("booklistDomain.Models.Star", b =>

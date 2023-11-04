@@ -1,95 +1,19 @@
 ﻿using booklistDomain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace booklistDomain.Interfaces.Identity
 {
     public interface IIdentityRepository
     {
         Task<AppUser?> FindByIdAsync(Guid userId);//根据Id获取用户
-        Task<AppUser?> FindByNameAsync(string userName);//根据用户名获取用户
         Task<AppUser?> FindByPhoneNumberAsync(string phoneNum);//根据手机号获取用户
-        Task<IdentityResult> CreateAsync(AppUser user, string password);//创建用户
-        Task<IdentityResult> AccessFailedAsync(AppUser user);//记录一次登陆失败
-
-        /// <summary>
-        /// 生成重置密码的令牌
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="phoneNumber"></param>
-        /// <returns></returns>
-        Task<string> GenerateChangePhoneNumberTokenAsync(AppUser user, string phoneNumber);
-        /// <summary>
-        /// 检查VCode，然后设置用户手机号为phoneNum
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="phoneNum"></param>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        Task<SignInResult> ChangePhoneNumAsync(Guid userId, string phoneNum, string token);
-        /// <summary>
-        /// 修改密码
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        Task<IdentityResult> ChangePasswordAsync(Guid userId, string password);
-
-        /// <summary>
-        /// 获取用户的角色
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        Task<IList<string>> GetRolesAsync(AppUser user);
-
-        /// <summary>
-        /// 把用户user加入角色role
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="role"></param>
-        /// <returns></returns>
-        Task<IdentityResult> AddToRoleAsync(AppUser user, string role);
-        /// <summary>
-        /// 为了登录而检查用户名、密码是否正确
-        /// </summary>
-        /// <param name="user"></param>
-        /// <param name="password"></param>
-        /// <param name="lockoutOnFailure">如果登录失败，则记录一次登陆失败</param>
-        /// <returns></returns>
-        public Task<SignInResult> CheckForSignInAsync(AppUser user, string password, bool lockoutOnFailure);
-        /// <summary>
-        /// 确认手机号
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public Task ConfirmPhoneNumberAsync(Guid id);
-
-        /// <summary>
-        /// 修改手机号
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="phoneNum"></param>
-        /// <returns></returns>
-        public Task UpdatePhoneNumberAsync(Guid id, string phoneNum);
-        /// <summary>
-        /// 删除用户
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public Task<IdentityResult> RemoveUserAsync(Guid id);
-
-        /// <summary>
-        /// 添加管理员
-        /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="phoneNum"></param>
-        /// <returns>返回值第三个是生成的密码</returns>
-        public Task<(IdentityResult, AppUser?, string? password)> AddAdminUserAsync(string userName, string phoneNum);
-
-        /// <summary>
-        /// 重置密码。
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>返回值第三个是生成的密码</returns>
-        public Task<(IdentityResult, AppUser?, string? password)> ResetPasswordAsync(Guid id);
+        Task<IdentityResult> CreateAsync(AppUser user);//创建用户
+        Task<IdentityResult?> SetPasswordAsync(Guid id, string password);//设置密码
+        Task<IdentityResult> AddToRoleAsync(string role);//添加身份
+        Task<IList<string>> GetRolesAsync(AppUser user);//获取用户身份
+        Task<IdentityResult> AddToRoleAsync(AppUser user, string role);//向用户添加身份
+        public Task<bool> SignInWithPwd(AppUser user, string password);//密码登陆检查
+        public Task<Guid> GetCurrentUserId(ClaimsPrincipal user);//获取用户id
     }
 }

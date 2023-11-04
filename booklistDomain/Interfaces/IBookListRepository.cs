@@ -12,8 +12,6 @@ namespace booklistDomain.Interfaces
         public Task<Comment?> GetCommentByIdAsync(Guid id);//获取指定id的评论
         public Task<IEnumerable<Comment>> GetCommentsByBookListAsync(Guid id);//获取指定书单的评论
         public Task<IEnumerable<Comment>> GetCommentsByUserAsync(Guid id);//获取指定用户的评论(这个好像一般不允许)
-        public Task<Like?> GetLikeByIdAsync(long id);//获取指定id的like
-        public Task<IEnumerable<Like>> GetLikesByCommentAsync(Guid id);//获取指定评论的所有like记录
         public Task<Star?> GetStarByIdAsync(long id);//获取指定id的收藏
         public Task<IEnumerable<Star>> GetStarsByBookList(Guid id);//获取指定书单的所有收藏记录
         public Task<IEnumerable<Star>> GetStarsByUserAsync(Guid id);//获取指定用户的收藏

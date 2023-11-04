@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -155,7 +156,6 @@ namespace booklistInfrastructure.Migrations
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Content = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    LikeNum = table.Column<int>(type: "int", nullable: false),
                     CommentatorId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     BookListId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
@@ -165,21 +165,6 @@ namespace booklistInfrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_T_Comments", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "T_Likes",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CommentId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    LikerId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_T_Likes", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -384,11 +369,6 @@ namespace booklistInfrastructure.Migrations
                 columns: new[] { "IsDeleted", "CreaterId" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_T_Likes_CommentId_LikerId",
-                table: "T_Likes",
-                columns: new[] { "CommentId", "LikerId" });
-
-            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "T_Roles",
                 column: "NormalizedName",
@@ -435,9 +415,6 @@ namespace booklistInfrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "T_Comments");
-
-            migrationBuilder.DropTable(
-                name: "T_Likes");
 
             migrationBuilder.DropTable(
                 name: "T_Stars");

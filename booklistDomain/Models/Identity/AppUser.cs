@@ -1,13 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Runtime.InteropServices;
 
 namespace booklistDomain.Entities.Identity
 {
     public class AppUser : IdentityUser<Guid>
     {
-        public AppUser(string userName) : base(userName)
+        public AppUser() : base( )
         {
             Id = Guid.NewGuid();
         }
-        //暂时这样写
+        public static AppUser Create(string phone)
+        {
+            var user = new AppUser();
+            user.UserName = phone;
+            user.PhoneNumber = phone;
+            return user;
+        }
     }
 }
